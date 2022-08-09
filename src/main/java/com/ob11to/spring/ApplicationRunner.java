@@ -11,12 +11,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ApplicationRunner {
 
     public static void main(String[] args) {
-        var context = new ClassPathXmlApplicationContext("application.xml");
-//        clazz -> String -> Map<String, Object>
-        var connectionPool1 = context.getBean("p1",ConnectionPool.class);
-        System.out.println(connectionPool1);
+        try (var context = new ClassPathXmlApplicationContext("application.xml")) {
+            //        clazz -> String -> Map<String, Object>
+            var connectionPool1 = context.getBean("p1", ConnectionPool.class);
+            System.out.println(connectionPool1);
 
-        var companyRepository = context.getBean("companyRepository", CompanyRepository.class);
-        System.out.println(companyRepository);
+            var companyRepository = context.getBean("companyRepository", CompanyRepository.class);
+            System.out.println(companyRepository);
+        }
     }
 }
