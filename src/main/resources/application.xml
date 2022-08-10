@@ -12,6 +12,9 @@
 <!--    </bean>-->
     <context:property-placeholder location="classpath:application.properties"/>
 
+<!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
+    <context:annotation-config/>
+
     <bean class="com.ob11to.spring.bfpp.LogBeanFactoryPostProcessor"/>
     <bean class="com.ob11to.spring.bfpp.VerifyPropertyBeanFactoryPostProcessor"/>
 
@@ -19,9 +22,7 @@
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>
 
-    <bean id="pool1" name="p1,p2,p3" class="com.ob11to.spring.database.pool.ConnectionPool"
-          init-method="init"
-          destroy-method="destroy">
+    <bean id="pool1" name="p1,p2,p3" class="com.ob11to.spring.database.pool.ConnectionPool">
         <constructor-arg name="username" type="java.lang.String" value="${db.username}"/>
         <constructor-arg name="properties" type="java.util.Map">
             <map>
