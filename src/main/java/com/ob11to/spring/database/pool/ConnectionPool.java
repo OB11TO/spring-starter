@@ -2,6 +2,8 @@ package com.ob11to.spring.database.pool;
 
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +33,12 @@ public class ConnectionPool implements InitializingBean {
         System.out.println("Вызовется вторым, после @PostConstruct");
     }
 
+    @PostConstruct
     private void init(){
         System.out.println("Вызовется третьим");
     }
 
+    @PreDestroy
     private void destroy(){
         System.out.println("Clean connection pool");
     }
