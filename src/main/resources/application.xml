@@ -7,6 +7,11 @@
                              http://www.springframework.org/schema/context
                              http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+
+    <bean class="com.ob11to.spring.bpp.InjectBeanPostProcessor"/>
+    <bean class="com.ob11to.spring.bpp.TransactionBeanPostProcessor"/>
+    <bean class="com.ob11to.spring.bpp.AuditingBeanPostProcessor"/>
+
 <!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
 <!--        <property name="location" value="application.properties"/>-->
 <!--    </bean>-->
@@ -51,7 +56,6 @@
         </property>
     </bean>
 
-    <bean class="com.ob11to.spring.bpp.InjectBeanPostProcessor"/>
     <bean id="companyRepository" class="com.ob11to.spring.database.repository.CompanyRepository"/>
 
 
