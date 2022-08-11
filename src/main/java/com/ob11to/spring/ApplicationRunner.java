@@ -2,9 +2,7 @@ package com.ob11to.spring;
 
 import com.ob11to.spring.database.pool.ConnectionPool;
 import com.ob11to.spring.database.repository.CompanyRepository;
-import com.ob11to.spring.database.repository.UserRepository;
-import com.ob11to.spring.ioc.Container;
-import com.ob11to.spring.service.UserService;
+import com.ob11to.spring.database.repository.CrudRepository;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -25,8 +23,8 @@ public class ApplicationRunner {
             var connectionPool1 = context.getBean("p1", ConnectionPool.class);
             System.out.println(connectionPool1);
 
-            var companyRepository = context.getBean("companyRepository", CompanyRepository.class);
-            System.out.println(companyRepository);
+            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            System.out.println(companyRepository.findById(1));
         }
     }
 }
