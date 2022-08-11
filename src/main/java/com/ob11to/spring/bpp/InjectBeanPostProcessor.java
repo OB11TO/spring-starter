@@ -17,11 +17,12 @@ public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationCo
         Arrays.stream(bean.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(InjectBean.class))
                 .forEach(field -> {
-                    Object beanToInject = applicationContext.getBean(String.valueOf(field.getType()));
+                    Object beanToInject = applicationContext.getBean(field.getType());
                     ReflectionUtils.makeAccessible(field);
                     ReflectionUtils.setField(field, bean, beanToInject);
                 });
-        return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
+
+        return bean;
     }
 
     @Override
