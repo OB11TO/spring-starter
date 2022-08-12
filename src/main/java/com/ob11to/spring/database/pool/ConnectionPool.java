@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class ConnectionPool implements InitializingBean {
 
-    private final String username;
-    private final Integer poolSize;
-    private final List<Object> args;
+    private String username;
+    private Integer poolSize;
+    private List<Object> args;
     private Map<String, Object> properties;
 
     public ConnectionPool(String username,
@@ -24,6 +24,10 @@ public class ConnectionPool implements InitializingBean {
         this.properties = properties;
     }
 
+    public ConnectionPool(){
+
+    }
+
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
@@ -34,12 +38,12 @@ public class ConnectionPool implements InitializingBean {
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         System.out.println("Вызовется третьим");
     }
 
     @PreDestroy
-    private void destroy(){
+    private void destroy() {
         System.out.println("Clean connection pool");
     }
 }
