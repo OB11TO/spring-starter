@@ -20,7 +20,7 @@ public class ApplicationRunner {
 
         try (var context = new ClassPathXmlApplicationContext("application.xml")) {
             //        clazz -> String -> Map<String, Object>
-            var connectionPool1 = context.getBean("p1", ConnectionPool.class);
+            var connectionPool1 = context.getBean("pool1", ConnectionPool.class);
             System.out.println(connectionPool1);
 
             var companyRepository = context.getBean("companyRepository", CrudRepository.class);
