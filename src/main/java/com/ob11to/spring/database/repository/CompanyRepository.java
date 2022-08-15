@@ -20,9 +20,9 @@ import java.util.Optional;
 @Repository
 public class CompanyRepository implements CrudRepository<Integer, Company> {
 
-    private ConnectionPool pool1;
-    private List<ConnectionPool> pools;
-    private Integer poolSize;
+    private final ConnectionPool pool1;
+    private final List<ConnectionPool> pools;
+    private final Integer poolSize;
 
     public CompanyRepository(ConnectionPool pool1,
                              List<ConnectionPool> pools,

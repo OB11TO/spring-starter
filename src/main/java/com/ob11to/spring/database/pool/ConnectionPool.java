@@ -25,7 +25,7 @@ public class ConnectionPool {
 
     @PostConstruct
     private void init() {
-        System.out.println("Вызовется третьим");
+        System.out.println("Вызовется первым");
     }
 
     @PreDestroy
