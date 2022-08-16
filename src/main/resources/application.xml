@@ -12,7 +12,7 @@
 <!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
 <!--        <property name="location" value="application.properties"/>-->
 <!--    </bean>-->
-    <context:property-placeholder location="classpath:application.properties"/>
+<!--    <context:property-placeholder location="classpath:application.properties"/>-->
 
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
