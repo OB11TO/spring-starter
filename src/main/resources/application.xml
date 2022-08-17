@@ -59,6 +59,6 @@
 <!--        <context:include-filter type="regex" expression="com\..+Repository"/>-->
 <!--    </context:component-scan>-->
 
-    <bean id="companyRepository" class="com.ob11to.spring.database.repository.CompanyRepository"/>
+<!--    <bean id="companyRepository" class="com.ob11to.spring.database.repository.CompanyRepository"/>-->
 
 </beans>
