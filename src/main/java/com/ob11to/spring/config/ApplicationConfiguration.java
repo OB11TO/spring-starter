@@ -1,13 +1,11 @@
 package com.ob11to.spring.config;
 
 import com.ob11to.spring.database.pool.ConnectionPool;
-import com.ob11to.spring.database.repository.CrudRepository;
 import com.ob11to.spring.database.repository.UserRepository;
 import com.ob11to.web.config.WebConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Component;
 
 //@ImportResource("classpath:application.xml")
 @Import(WebConfiguration.class)

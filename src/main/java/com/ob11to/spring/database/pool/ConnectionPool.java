@@ -1,14 +1,10 @@
 package com.ob11to.spring.database.pool;
 
-import lombok.Getter;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.util.List;
-import java.util.Map;
 
 //@Getter
 @Component("pool1")
