@@ -1,17 +1,13 @@
 package com.ob11to.spring.database.repository;
 
 import com.ob11to.spring.bpp.Auditing;
-import com.ob11to.spring.bpp.InjectBean;
 import com.ob11to.spring.bpp.Transaction;
 import com.ob11to.spring.database.entity.Company;
 import com.ob11to.spring.database.pool.ConnectionPool;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 
