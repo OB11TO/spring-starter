@@ -10,15 +10,6 @@ import org.springframework.context.annotation.*;
 //@ImportResource("classpath:application.xml")
 @Import(WebConfiguration.class)
 @Configuration
-@PropertySource("classpath:application.properties")
-@ComponentScan(basePackages = "com.ob11to.spring")
-//@ComponentScan(basePackages = "com.ob11to.spring",
-//        useDefaultFilters = false,
-//        includeFilters = {
-//                @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Component.class),
-//                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = CrudRepository.class),
-//                @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com\\..+Repository")
-//        })
 public class ApplicationConfiguration {
 
     @Bean
