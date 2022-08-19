@@ -10,8 +10,14 @@ import javax.annotation.PostConstruct;
 @Conditional(JpaConditional.class)
 public class JpaConfiguration {
 
+//    @Bean
+//    @ConfigurationProperties(prefix = "db")
+//    public DataBaseProperties properties(){
+//        return new DataBaseProperties();
+//    }
+
     @PostConstruct
-    void init(){
+    void init() {
         System.out.println("Jpa configuration is enabled");
     }
 }
