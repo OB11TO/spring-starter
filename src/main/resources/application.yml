@@ -20,3 +20,8 @@ db:
       timeout: 3
 
 spring.profiles.active: qa
+
+#logging:
+#  level:
+#    root: warn
+#    com.ob11to.spring.database.pool.ConnectionPool: info
