@@ -25,3 +25,17 @@ spring.profiles.active: qa
 #  level:
 #    root: warn
 #    com.ob11to.spring.database.pool.ConnectionPool: info
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring-starter
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties.hibernate:
+      show_sql: true
+      format_sql: true
+#      hbm2ddl.auto: validate
+    hibernate:
+      ddl-auto: validate
