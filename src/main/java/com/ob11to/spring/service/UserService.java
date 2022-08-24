@@ -1,7 +1,6 @@
 package com.ob11to.spring.service;
 
-import com.ob11to.spring.database.entity.Company;
-import com.ob11to.spring.database.repository.CrudRepository;
+import com.ob11to.spring.database.repository.CompanyRepository;
 import com.ob11to.spring.database.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -14,6 +13,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     public final UserRepository userRepository;
-    public final CrudRepository<Integer, Company> companyRepository;
+    public final CompanyRepository companyRepository;
 
 }

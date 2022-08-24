@@ -1,7 +1,6 @@
 package com.ob11to.spring.service;
 
-import com.ob11to.spring.database.entity.Company;
-import com.ob11to.spring.database.repository.CrudRepository;
+import com.ob11to.spring.database.repository.CompanyRepository;
 import com.ob11to.spring.dto.CompanyReadDto;
 import com.ob11to.spring.listner.entity.AccessType;
 import com.ob11to.spring.listner.entity.EntityEvent;
@@ -17,7 +16,7 @@ import java.util.Optional;
 @Transactional
 public class CompanyService {
 
-    private final CrudRepository<Integer, Company> companyRepository;
+    private final CompanyRepository companyRepository;
     private final UserService userService;
     private final ApplicationEventPublisher eventPublisher;
 
