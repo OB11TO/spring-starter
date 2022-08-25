@@ -23,6 +23,13 @@ class CompanyRepositoryTest {
     private final EntityManager entityManager;
     private final CompanyRepository companyRepository;
 
+    @Test
+    void queryTest(){
+        var google = companyRepository.findByName("Google");
+        assertTrue(google.isPresent());
+        google.ifPresent(System.out::println);
+
+    }
 
     @Test
     void partTreeJpaQueryTest(){
