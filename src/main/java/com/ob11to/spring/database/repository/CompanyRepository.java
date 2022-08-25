@@ -3,11 +3,12 @@ package com.ob11to.spring.database.repository;
 import com.ob11to.spring.database.entity.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
-    Optional<Company> findById(Integer id);
+    Optional<Company> findByName(String name);
 
-    void delete(Company entity);
+    List<Company> findAllByNameContainingIgnoreCase(String fragment);
 }
