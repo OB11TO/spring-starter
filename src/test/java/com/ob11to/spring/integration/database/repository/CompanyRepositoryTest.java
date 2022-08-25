@@ -24,6 +24,26 @@ class CompanyRepositoryTest {
     private final CompanyRepository companyRepository;
 
     @Test
+    void queryTest(){
+        var google = companyRepository.findByName("Google");
+        assertTrue(google.isPresent());
+        google.ifPresent(System.out::println);
+
+    }
+
+    @Test
+    void partTreeJpaQueryTest(){
+        var google = companyRepository.findByName("Google");
+        assertTrue(google.isPresent());
+        google.ifPresent(System.out::println);
+
+        var companyRepositoryAllByNameContainingIgnoreCase =
+                companyRepository.findAllByNameContainingIgnoreCase("a");
+        companyRepositoryAllByNameContainingIgnoreCase.toString();
+    }
+
+
+    @Test
     void delete(){
         var maybeCompany = companyRepository.findById(APPLE_ID);
         assertTrue(maybeCompany.isPresent());
