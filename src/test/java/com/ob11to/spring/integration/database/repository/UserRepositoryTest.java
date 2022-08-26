@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -23,9 +25,12 @@ class UserRepositoryTest {
     void checkUpdate(){
         var ivan = userRepository.getReferenceById(1L);
         assertSame(Role.ADMIN, ivan.getRole());
+        ivan.setBirthDate(LocalDate.now());
 
         var updateRoleCount = userRepository.updateRole(Role.USER, 1L, 5L);
         assertEquals(2, updateRoleCount);
+
+        ivan.getCompany().getName();
 
         var theSameIvan = userRepository.getReferenceById(1L);
         assertSame(Role.USER, theSameIvan.getRole());
