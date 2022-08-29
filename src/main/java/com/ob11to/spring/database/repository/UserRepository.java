@@ -4,12 +4,11 @@ import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.database.entity.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.lang.NonNull;
 
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +31,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findFirstByOrderByIdDesc();
 
+    @QueryHints(@QueryHint(name = "org.hibernate.fetchSize", value = "50"))
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<User> findTop3ByBirthDateBefore(LocalDate localDate, Sort sort);
 
     List<User> findAllBy(Pageable pageable);
