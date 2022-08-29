@@ -4,9 +4,11 @@ import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.database.entity.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,6 +35,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findTop3ByBirthDateBefore(LocalDate localDate, Sort sort);
 
     List<User> findAllBy(Pageable pageable);
+
+    //    @EntityGraph(value = "User.company")
+    @EntityGraph(attributePaths = {"company", "company.locales"})
+    @Override
+    @NonNull
+    Optional<User> findById(@NonNull Long id);
 
 
 }

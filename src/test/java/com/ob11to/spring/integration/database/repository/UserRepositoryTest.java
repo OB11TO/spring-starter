@@ -23,6 +23,15 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
+    void checkEntityGraph(){
+        var maybeUser = userRepository.findById(1L);
+        assertTrue(maybeUser.isPresent());
+        maybeUser.ifPresent(user -> assertEquals("ivan@gmail.com", user.getUsername()));
+
+        maybeUser.ifPresent(user -> System.out.println(user.getCompany().getLocales()));
+    }
+
+    @Test
     void checkPageable() {
         var pageable = PageRequest.of(1, 2, Sort.by("id"));
         var users = userRepository.findAllBy(pageable);
