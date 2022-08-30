@@ -2,6 +2,7 @@ package com.ob11to.spring.database.repository;
 
 import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.database.entity.User;
+import com.ob11to.spring.dto.PersonalInfo2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, FilterUserRepository {
 
     @Query("select u from User u " +
             "where u.firstname like %:firstname% and u.lastname like %:lastname%")
@@ -43,5 +44,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @NonNull
     Optional<User> findById(@NonNull Long id);
 
+//    List<PersonalInfo> findAllByCompanyId(Integer id);
+
+//    <T> List<T> findAllByCompanyId(Integer id, Class<T> clazz);
+
+    @Query(nativeQuery = true,
+            value = "SELECT firstname, " +
+                    "lastname, " +
+                    "birth_date birthDate " +
+                    "FROM users " +
+                    "WHERE company_id = :companyId")
+    List<PersonalInfo2> findAllByCompanyId(Integer companyId);
 
 }

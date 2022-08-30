@@ -3,6 +3,7 @@ package com.ob11to.spring.integration.database.repository;
 import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.database.entity.User;
 import com.ob11to.spring.database.repository.UserRepository;
+import com.ob11to.spring.dto.UserFilter;
 import com.ob11to.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,30 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
-    void checkEntityGraph(){
+    void checkAuditing() {
+        var user = userRepository.findById(1L).get();
+        user.setBirthDate(user.getBirthDate().plusYears(1L));
+        userRepository.flush();
+        System.out.println();
+    }
+
+    @Test
+    void checkCustomImplementation() {
+        var filter = new UserFilter(
+                null, "%ov%", LocalDate.now()
+        );
+        var users = userRepository.findAllByFilter(filter);
+        assertThat(users).hasSize(4);
+    }
+
+    @Test
+    void checkProjection() {
+        var users = userRepository.findAllByCompanyId(1);
+        assertThat(users).hasSize(2);
+    }
+
+    @Test
+    void checkEntityGraph() {
         var maybeUser = userRepository.findById(1L);
         assertTrue(maybeUser.isPresent());
         maybeUser.ifPresent(user -> assertEquals("ivan@gmail.com", user.getUsername()));
