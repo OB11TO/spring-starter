@@ -24,7 +24,15 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
-    void checkCustomImplementation(){
+    void checkAuditing() {
+        var user = userRepository.findById(1L).get();
+        user.setBirthDate(user.getBirthDate().plusYears(1L));
+        userRepository.flush();
+        System.out.println();
+    }
+
+    @Test
+    void checkCustomImplementation() {
         var filter = new UserFilter(
                 null, "%ov%", LocalDate.now()
         );
@@ -33,13 +41,13 @@ class UserRepositoryTest {
     }
 
     @Test
-    void checkProjection(){
+    void checkProjection() {
         var users = userRepository.findAllByCompanyId(1);
         assertThat(users).hasSize(2);
     }
 
     @Test
-    void checkEntityGraph(){
+    void checkEntityGraph() {
         var maybeUser = userRepository.findById(1L);
         assertTrue(maybeUser.isPresent());
         maybeUser.ifPresent(user -> assertEquals("ivan@gmail.com", user.getUsername()));
