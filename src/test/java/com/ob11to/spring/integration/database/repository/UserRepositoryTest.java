@@ -23,6 +23,12 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
+    void checkProjection(){
+        var users = userRepository.findAllByCompanyId(1);
+        assertThat(users).hasSize(2);
+    }
+
+    @Test
     void checkEntityGraph(){
         var maybeUser = userRepository.findById(1L);
         assertTrue(maybeUser.isPresent());
