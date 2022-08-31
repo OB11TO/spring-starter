@@ -6,6 +6,7 @@ import com.ob11to.spring.dto.PersonalInfo2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.LockModeType;
@@ -14,7 +15,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long>, FilterUserRepository {
+public interface UserRepository extends
+        JpaRepository<User, Long>,
+        FilterUserRepository,
+        QuerydslPredicateExecutor<User> {
 
     @Query("select u from User u " +
             "where u.firstname like %:firstname% and u.lastname like %:lastname%")
