@@ -26,6 +26,12 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
+    void checkJdbcStarter() {
+        var users = userRepository.findAllByCompanyIdAndRole(1, Role.USER);
+        assertThat(users).hasSize(1);
+    }
+
+    @Test
     void checkQueryDsl() {
         var filter = new UserFilter(
                 null, "ov", LocalDate.now()
