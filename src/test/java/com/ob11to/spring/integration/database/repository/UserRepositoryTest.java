@@ -6,10 +6,11 @@ import com.ob11to.spring.database.repository.UserRepository;
 import com.ob11to.spring.dto.UserFilter;
 import com.ob11to.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 
@@ -19,8 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @IT
+@Sql({
+        "classpath:sql/data.sql"
+})
 @RequiredArgsConstructor
-@Transactional
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
@@ -62,6 +65,7 @@ class UserRepositoryTest {
         System.out.println();
     }
 
+    @Disabled("уже не нужный функционал")
     @Test
     void checkCustomImplementation() {
         var filter = new UserFilter(
