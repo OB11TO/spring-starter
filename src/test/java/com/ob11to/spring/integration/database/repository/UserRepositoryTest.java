@@ -1,15 +1,15 @@
 package com.ob11to.spring.integration.database.repository;
 
+import com.ob11to.spring.IntegrationTestBase;
 import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.database.entity.User;
 import com.ob11to.spring.database.repository.UserRepository;
 import com.ob11to.spring.dto.UserFilter;
-import com.ob11to.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -18,12 +18,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@IT
+
 @RequiredArgsConstructor
-@Transactional
-class UserRepositoryTest {
+class UserRepositoryTest extends IntegrationTestBase {
 
     private final UserRepository userRepository;
+
+    @Test
+    void checkBatchNamed() {
+        var users = userRepository.findAll();
+        var resultInts = userRepository.updateCompanyAndRoleNamed(users);
+        assertThat(resultInts).hasSize(5);
+    }
+
+    @Test
+    void checkBatch() {
+        var users = userRepository.findAll();
+        var resultInts = userRepository.updateCompanyAndRole(users);
+        assertThat(resultInts).hasSize(5);
+    }
 
     @Test
     void checkJdbcStarter() {
@@ -48,6 +61,7 @@ class UserRepositoryTest {
         System.out.println();
     }
 
+    @Disabled("уже не нужный функционал")
     @Test
     void checkCustomImplementation() {
         var filter = new UserFilter(

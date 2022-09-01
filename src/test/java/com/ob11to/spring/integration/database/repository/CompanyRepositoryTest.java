@@ -1,12 +1,11 @@
 package com.ob11to.spring.integration.database.repository;
 
+import com.ob11to.spring.IntegrationTestBase;
 import com.ob11to.spring.database.entity.Company;
 import com.ob11to.spring.database.repository.CompanyRepository;
-import com.ob11to.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.Map;
@@ -14,17 +13,16 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@IT
+
 @RequiredArgsConstructor
-@Transactional
-class CompanyRepositoryTest {
+class CompanyRepositoryTest extends IntegrationTestBase {
 
     private final static Integer APPLE_ID = 9;
     private final EntityManager entityManager;
     private final CompanyRepository companyRepository;
 
     @Test
-    void queryTest(){
+    void queryTest() {
         var google = companyRepository.findByName("Google");
         assertTrue(google.isPresent());
         google.ifPresent(System.out::println);
@@ -32,7 +30,7 @@ class CompanyRepositoryTest {
     }
 
     @Test
-    void partTreeJpaQueryTest(){
+    void partTreeJpaQueryTest() {
         var google = companyRepository.findByName("Google");
         assertTrue(google.isPresent());
         google.ifPresent(System.out::println);
@@ -44,7 +42,7 @@ class CompanyRepositoryTest {
 
 
     @Test
-    void delete(){
+    void delete() {
         var maybeCompany = companyRepository.findById(APPLE_ID);
         assertTrue(maybeCompany.isPresent());
         maybeCompany.ifPresent(companyRepository::delete);
@@ -60,7 +58,7 @@ class CompanyRepositoryTest {
     }
 
     @Test
-    void save(){
+    void save() {
         var company = Company.builder()
                 .name("Apple2")
                 .locales(Map.of(
