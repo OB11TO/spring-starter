@@ -1,16 +1,15 @@
 package com.ob11to.spring.integration.database.repository;
 
+import com.ob11to.spring.IntegrationTestBase;
 import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.database.entity.User;
 import com.ob11to.spring.database.repository.UserRepository;
 import com.ob11to.spring.dto.UserFilter;
-import com.ob11to.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 
@@ -19,12 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@IT
-@Sql({
-        "classpath:sql/data.sql"
-})
+
 @RequiredArgsConstructor
-class UserRepositoryTest {
+class UserRepositoryTest extends IntegrationTestBase {
 
     private final UserRepository userRepository;
 
