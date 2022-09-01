@@ -26,6 +26,20 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
+    void checkBatchNamed() {
+        var users = userRepository.findAll();
+        var resultInts = userRepository.updateCompanyAndRoleNamed(users);
+        assertThat(resultInts).hasSize(5);
+    }
+
+    @Test
+    void checkBatch() {
+        var users = userRepository.findAll();
+        var resultInts = userRepository.updateCompanyAndRole(users);
+        assertThat(resultInts).hasSize(5);
+    }
+
+    @Test
     void checkJdbcStarter() {
         var users = userRepository.findAllByCompanyIdAndRole(1, Role.USER);
         assertThat(users).hasSize(1);
