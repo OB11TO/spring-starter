@@ -38,6 +38,6 @@ spring:
       fetch_size: 50
       show_sql: true
       format_sql: true
-#      hbm2ddl.auto: validate
-    hibernate:
-      ddl-auto: validate
+      hbm2ddl.auto: validate
+#    hibernate:
+#      ddl-auto: validate
