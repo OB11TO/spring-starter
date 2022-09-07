@@ -27,6 +27,10 @@ logging:
     org.springframework.jdbc.core: TRACE
 
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   datasource:
     url: jdbc:postgresql://localhost:5432/spring-starter
     username: postgres
