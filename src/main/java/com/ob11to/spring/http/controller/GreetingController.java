@@ -3,6 +3,7 @@ package com.ob11to.spring.http.controller;
 import com.ob11to.spring.database.repository.CompanyRepository;
 import com.ob11to.spring.dto.UserReadDto;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 public class GreetingController {
 
     @GetMapping("/hello")
-    public ModelAndView hello(ModelAndView modelAndView, HttpServletRequest request) {
+    public String hello(Model model, HttpServletRequest request, UserReadDto userReadDto) {
 //        request.setAttribute(); requestScope
 //        request.getSession().setAttribute(); sessionScope
-        modelAndView.setViewName("greeting/hello");
-        modelAndView.addObject("user", new UserReadDto(1L, "Ivan"));
+        model.addAttribute("user", new UserReadDto(1L, "Ivan"));
 
-        return modelAndView;
+        return "greeting/hello";
     }
 
     @GetMapping("/hello/{id}")
