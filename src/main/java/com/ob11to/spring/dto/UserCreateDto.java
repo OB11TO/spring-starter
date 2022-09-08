@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 @Value
 public class UserCreateDto {
-    Long id;
     String username;
     LocalDate birthDate;
     String firstname;
