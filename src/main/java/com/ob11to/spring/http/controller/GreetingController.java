@@ -25,7 +25,7 @@ public class GreetingController {
     public String hello(Model model, HttpServletRequest request, UserReadDto userReadDto) {
 //        request.setAttribute(); requestScope
 //        request.getSession().setAttribute(); sessionScope
-        model.addAttribute("user", new UserReadDto(1L, "Ivan"));
+//        model.addAttribute("user", new UserReadDto(1L, "Ivan"));
 
         return "greeting/hello";
     }
