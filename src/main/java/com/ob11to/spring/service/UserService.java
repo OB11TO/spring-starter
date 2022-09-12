@@ -41,4 +41,24 @@ public class UserService {
                 .map(userReadMapper::map)
                 .orElseThrow();
     }
+
+    @Transactional
+    public Optional<UserReadDto> updateUser(Long id, UserCreateDto userCreateDto) {
+        return userRepository.findById(id)
+                .map(entity -> userCreateMapper.map(userCreateDto, entity))
+                .map(userRepository::saveAndFlush)
+                .map(userReadMapper::map);
+
+    }
+
+    @Transactional
+    public boolean deleteUser(Long id) {
+        return userRepository.findById(id)
+                .map(entity -> {
+                    userRepository.delete(entity);
+                    userRepository.flush();
+                    return true;
+                })
+                .orElse(false);
+    }
 }
