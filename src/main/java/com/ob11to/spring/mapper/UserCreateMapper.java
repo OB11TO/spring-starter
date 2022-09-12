@@ -16,15 +16,27 @@ public class UserCreateMapper implements Mapper<UserCreateDto, User> {
     private final CompanyRepository companyRepository;
 
     @Override
+    public User map(UserCreateDto fromObject, User toObject) {
+        copy(fromObject, toObject);
+
+        return toObject;
+    }
+
+    @Override
     public User map(UserCreateDto object) {
-       return User.builder()
-               .username(object.getUsername())
-               .birthDate(object.getBirthDate())
-               .firstname(object.getFirstname())
-               .lastname(object.getLastname())
-               .role(object.getRole())
-               .company(getCompany(object.getCompanyId()))
-               .build();
+       User user = new User();
+       copy(object, user);
+
+       return user;
+    }
+
+    private void copy(UserCreateDto object, User user) {
+        user.setUsername(object.getUsername());
+        user.setFirstname(object.getFirstname());
+        user.setLastname(object.getLastname());
+        user.setBirthDate(object.getBirthDate());
+        user.setRole(object.getRole());
+        user.setCompany(getCompany(object.getCompanyId()));
     }
 
     public Company getCompany(Integer companyId) {
