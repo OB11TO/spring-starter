@@ -13,5 +13,6 @@ public class ApplicationRunner {
         var context = SpringApplication.run(ApplicationRunner.class, args);
         System.out.println(context.getBean(CompanyRepository.class));
         System.out.println(context.getBeanDefinitionCount());
+
     }
 }

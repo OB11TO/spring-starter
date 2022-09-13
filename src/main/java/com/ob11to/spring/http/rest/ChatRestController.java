@@ -1,8 +1,8 @@
 package com.ob11to.spring.http.rest;
 
-import com.ob11to.spring.dto.UserCreateDto;
-import com.ob11to.spring.dto.UserReadDto;
-import com.ob11to.spring.service.UserService;
+import com.ob11to.spring.dto.ChatCreateDto;
+import com.ob11to.spring.dto.ChatReadDto;
+import com.ob11to.spring.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,39 +19,39 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
+@RequestMapping("api/v1/chats")
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/users")
-public class UserRestController {
+public class ChatRestController {
 
-    private final UserService userService;
+    private final ChatService chatService;
 
     @GetMapping
-    public ResponseEntity<List<UserReadDto>> findAll() {
-        return ResponseEntity.ok(userService.findAll());
+    public ResponseEntity<List<ChatReadDto>> findAll() {
+        return ResponseEntity.ok(chatService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserReadDto> findById(@PathVariable Long id) {
-        return userService.findById(id)
-                .map(userReadDto -> ResponseEntity.ok().body(userReadDto))
+    public ResponseEntity<ChatReadDto> findById(@PathVariable Long id) {
+        return chatService.findById(id)
+                .map(chatReadDto -> ResponseEntity.ok().body(chatReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<UserReadDto> createUser(@RequestBody UserCreateDto userCreateDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userCreateDto));
+    public ResponseEntity<ChatReadDto> createChat(@RequestBody ChatCreateDto chatCreateDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(chatService.createChat(chatCreateDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserReadDto> updateUser(@PathVariable Long id, @RequestBody UserCreateDto userCreateDto) {
-        return userService.updateUser(id, userCreateDto)
-                .map(userReadDto -> ResponseEntity.ok().body(userReadDto))
+    public ResponseEntity<ChatReadDto> updateChat(@PathVariable Long id, @RequestBody ChatCreateDto chatCreateDto) {
+        return chatService.updateChat(id, chatCreateDto)
+                .map(chatReadDto -> ResponseEntity.ok().body(chatReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteUser(@PathVariable Long id) {
-        if(!userService.deleteUser(id)) {
+    public ResponseEntity<Long> deleteChat(@PathVariable Long id) {
+        if(!chatService.deleteChat(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(id);
