@@ -1,11 +1,17 @@
 package com.ob11to.spring.database.repository;
 
+import com.ob11to.spring.database.entity.Chat;
 import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.database.entity.User;
 import com.ob11to.spring.dto.PersonalInfo2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.lang.NonNull;
 
@@ -59,5 +65,11 @@ public interface UserRepository extends
                     "FROM users " +
                     "WHERE company_id = :companyId")
     List<PersonalInfo2> findAllByCompanyId(Integer companyId);
+
+//    @Query("select uc.chat from UserChat uc where uc.user = :user")
+    @Query("select us.chat from User u " +
+            "join u.userChats us " +
+            "where u.id = :id")
+    List<Chat> findAllByUserChats(Long id);
 
 }

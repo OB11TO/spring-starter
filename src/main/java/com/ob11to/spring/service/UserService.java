@@ -1,8 +1,10 @@
 package com.ob11to.spring.service;
 
 import com.ob11to.spring.database.repository.UserRepository;
+import com.ob11to.spring.dto.ChatReadDto;
 import com.ob11to.spring.dto.UserCreateDto;
 import com.ob11to.spring.dto.UserReadDto;
+import com.ob11to.spring.mapper.ChatReadMapper;
 import com.ob11to.spring.mapper.UserCreateMapper;
 import com.ob11to.spring.mapper.UserReadMapper;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -21,11 +24,18 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserReadMapper userReadMapper;
     private final UserCreateMapper userCreateMapper;
+    private final ChatReadMapper chatReadMapper;
+
+    public List<ChatReadDto> findAllByUserChats(Long id) {
+        return userRepository.findAllByUserChats(id).stream()
+                .map(chatReadMapper::map)
+                .collect(toList());
+    }
 
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public Optional<UserReadDto> findById(Long id) {
