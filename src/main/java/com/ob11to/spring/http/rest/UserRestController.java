@@ -1,5 +1,6 @@
 package com.ob11to.spring.http.rest;
 
+import com.ob11to.spring.dto.ChatReadDto;
 import com.ob11to.spring.dto.UserCreateDto;
 import com.ob11to.spring.dto.UserReadDto;
 import com.ob11to.spring.service.UserService;
@@ -24,6 +25,11 @@ import java.util.List;
 public class UserRestController {
 
     private final UserService userService;
+
+    @GetMapping("/{id}/chats")
+    public ResponseEntity<List<ChatReadDto>> findAllByUserChats(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findAllByUserChats(id));
+    }
 
     @GetMapping
     public ResponseEntity<List<UserReadDto>> findAll() {
