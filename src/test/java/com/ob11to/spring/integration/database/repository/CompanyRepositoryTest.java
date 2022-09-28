@@ -5,6 +5,7 @@ import com.ob11to.spring.database.entity.Company;
 import com.ob11to.spring.database.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -42,6 +43,7 @@ class CompanyRepositoryTest extends IntegrationTestBase {
 
 
     @Test
+    @Disabled
     void delete() {
         var maybeCompany = companyRepository.findById(APPLE_ID);
         assertTrue(maybeCompany.isPresent());

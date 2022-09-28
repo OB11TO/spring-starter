@@ -15,7 +15,7 @@ public class UserReadMapper implements Mapper<User, UserReadDto> {
 
     @Override
     public UserReadDto map(User user) {
-        var companyReadDto = Optional.ofNullable(user.getCompany())
+        var company = Optional.ofNullable(user.getCompany())
                 .map(companyReadMapper::map)
                 .orElse(null);
         return new UserReadDto(
@@ -25,7 +25,7 @@ public class UserReadMapper implements Mapper<User, UserReadDto> {
                 user.getFirstname(),
                 user.getLastname(),
                 user.getRole(),
-                companyReadDto
+                company
         );
     }
 }
