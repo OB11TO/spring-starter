@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +23,12 @@ import javax.servlet.http.HttpServletRequest;
 public class GreetingController {
 
     @GetMapping("/hello")
-    public String hello(Model model, HttpServletRequest request, UserReadDto userReadDto) {
+    public String hello(Model model,
+                        HttpServletRequest request,
+                        @ModelAttribute("userReadDto") UserReadDto userReadDto) {
 //        request.setAttribute(); requestScope
 //        request.getSession().setAttribute(); sessionScope
-//        model.addAttribute("user", new UserReadDto(1L, "Ivan"));
+        model.addAttribute("user", userReadDto);
 
         return "greeting/hello";
     }
