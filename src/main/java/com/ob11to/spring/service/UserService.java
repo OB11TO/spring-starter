@@ -1,19 +1,24 @@
 package com.ob11to.spring.service;
 
 import com.ob11to.spring.database.repository.UserRepository;
+import com.ob11to.spring.database.repository.querydsl.QPredicates;
 import com.ob11to.spring.dto.ChatReadDto;
 import com.ob11to.spring.dto.UserCreateDto;
+import com.ob11to.spring.dto.UserFilter;
 import com.ob11to.spring.dto.UserReadDto;
 import com.ob11to.spring.mapper.ChatReadMapper;
 import com.ob11to.spring.mapper.UserCreateMapper;
 import com.ob11to.spring.mapper.UserReadMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+import static com.ob11to.spring.database.entity.QUser.user;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -36,6 +41,23 @@ public class UserService {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
                 .collect(toList());
+    }
+
+    public List<UserReadDto> findAllByFilter(UserFilter userFilter) {
+        return userRepository.findAllByFilter(userFilter).stream()
+                .map(userReadMapper::map)
+                .collect(toList());
+    }
+
+    public Page<UserReadDto> findAllByFilterAndPageable(UserFilter filter, Pageable pageable) {
+        var predicate = QPredicates.builder()
+                .add(filter.getFirstname(), user.firstname::containsIgnoreCase)
+                .add(filter.getLastname(), user.lastname::containsIgnoreCase)
+                .add(filter.getBirthDate(), user.birthDate::before)
+                .build();
+
+        return userRepository.findAll(predicate, pageable)
+                .map(userReadMapper::map);
     }
 
     public Optional<UserReadDto> findById(Long id) {
