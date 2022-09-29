@@ -1,10 +1,13 @@
 package com.ob11to.spring.http.controller;
 
 import com.ob11to.spring.database.entity.Role;
+import com.ob11to.spring.dto.PageResponse;
 import com.ob11to.spring.dto.UserCreateDto;
+import com.ob11to.spring.dto.UserFilter;
 import com.ob11to.spring.service.CompanyService;
 import com.ob11to.spring.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +27,10 @@ public class UserController {
     private final CompanyService companyService;
 
     @GetMapping
-    public String findAll(Model model) {
-//        model.addAttribute("users", userService.findAll(filter));
-        model.addAttribute("users", userService.findAll());
+    public String findAll(Model model, UserFilter userFilter, Pageable pageable) {
+        var page = userService.findAllByFilterAndPageable(userFilter, pageable);
+        model.addAttribute("users", PageResponse.of(page));
+        model.addAttribute("filter", userFilter);
         return "user/users";
     }
 
