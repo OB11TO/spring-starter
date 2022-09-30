@@ -1,6 +1,7 @@
 package com.ob11to.spring.dto;
 
 import com.ob11to.spring.database.entity.Role;
+import com.ob11to.spring.validation.UserInfo;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 
 @Value
 @FieldNameConstants
+@UserInfo
 public class UserCreateDto {
     @Email
     String username;
