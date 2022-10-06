@@ -16,13 +16,13 @@ import java.time.LocalDate;
 @FieldNameConstants
 @UserInfo
 public class UserCreateDto {
-    @Email
+    @Email(message = "email invalid address")
     String username;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate birthDate;
 
-    @NotEmpty
+    @NotEmpty(message = "not empty")
     @Size(min = 3, max = 64)
     String firstname;
 

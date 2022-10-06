@@ -7,6 +7,7 @@ import com.ob11to.spring.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,12 +45,12 @@ public class UserRestController {
     }
 
     @PostMapping
-    public ResponseEntity<UserReadDto> createUser(@RequestBody UserCreateDto userCreateDto) {
+    public ResponseEntity<UserReadDto> createUser(@RequestBody @Validated UserCreateDto userCreateDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userCreateDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserReadDto> updateUser(@PathVariable Long id, @RequestBody UserCreateDto userCreateDto) {
+    public ResponseEntity<UserReadDto> updateUser(@PathVariable Long id, @Validated @RequestBody UserCreateDto userCreateDto) {
         return userService.updateUser(id, userCreateDto)
                 .map(userReadDto -> ResponseEntity.ok().body(userReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
