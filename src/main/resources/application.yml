@@ -51,11 +51,14 @@ spring:
 #      ddl-auto: validate
   mail:
     host: smtp.gmail.com
-    port: 25
+    port: 587
     username: 0b11t061@gmail.com
-    password: llpzapfiupamldaw
+#    password: DO NOT DO THIS
     properties:
       mail:
+        transport:
+          protocol: smtp
+        debug: true
         smtp:
           auth: true
           starttls:
