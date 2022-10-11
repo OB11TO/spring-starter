@@ -24,7 +24,7 @@ class CompanyRepositoryTest extends IntegrationTestBase {
 
     @Test
     void queryTest() {
-        var google = companyRepository.findByName("Google");
+        var google = companyRepository.findByName("Amazon");
         assertTrue(google.isPresent());
         google.ifPresent(System.out::println);
 
