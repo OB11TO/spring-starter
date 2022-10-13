@@ -43,7 +43,7 @@ public class UserRestController {
                 .map(userReadDto -> ResponseEntity.ok().body(userReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
+ 
     @PostMapping
     public ResponseEntity<UserReadDto> createUser(@RequestBody @Validated UserCreateDto userCreateDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userCreateDto));
