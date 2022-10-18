@@ -38,6 +38,7 @@ public class UserServiceIT extends IntegrationTestBase {
         maybeUser.ifPresent(user -> assertEquals("ivan@gmail.com", user.getUsername()));
     }
 
+
     @Test
     void createUser() {
         var userCreateDto = new UserCreateDto(
