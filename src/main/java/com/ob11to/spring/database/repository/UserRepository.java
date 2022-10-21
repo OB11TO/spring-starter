@@ -72,4 +72,6 @@ public interface UserRepository extends
             "where u.id = :id")
     List<Chat> findAllByUserChats(Long id);
 
+    Optional<User> findByUsername(String username);
+
 }
