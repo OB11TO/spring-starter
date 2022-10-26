@@ -2,6 +2,7 @@ package com.ob11to.spring.dto;
 
 import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.validation.UserInfo;
+import com.ob11to.spring.validation.group.CreateAction;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,6 +19,9 @@ import java.time.LocalDate;
 public class UserCreateDto {
     @Email(message = "email invalid address")
     String username;
+
+    @NotBlank(groups = CreateAction.class)
+    String rawPassword;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate birthDate;
