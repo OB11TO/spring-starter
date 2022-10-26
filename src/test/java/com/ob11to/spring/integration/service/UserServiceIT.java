@@ -43,6 +43,7 @@ public class UserServiceIT extends IntegrationTestBase {
     void createUser() {
         var userCreateDto = new UserCreateDto(
                 "test@gmail.com",
+                "{noop}123",
                 LocalDate.now(),
                 "Test",
                 "Test",
@@ -63,6 +64,7 @@ public class UserServiceIT extends IntegrationTestBase {
     void update() {
         UserCreateDto userDto = new UserCreateDto(
                 "test@gmail.com",
+                "{noop}123",
                 LocalDate.now(),
                 "Test",
                 "Test",
