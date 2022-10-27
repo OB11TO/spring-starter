@@ -12,6 +12,7 @@ import com.ob11to.spring.mapper.UserReadMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -54,6 +55,7 @@ public class UserService implements UserDetailsService {
                 .collect(toList());
     }
 
+//    @PostFilter("filterObject.role.name().equals('ADMIN')")
     public Page<UserReadDto> findAllByFilterAndPageable(UserFilter filter, Pageable pageable) {
         var predicate = QPredicates.builder()
                 .add(filter.getFirstname(), user.firstname::containsIgnoreCase)
@@ -65,6 +67,7 @@ public class UserService implements UserDetailsService {
                 .map(userReadMapper::map);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Optional<UserReadDto> findById(Long id) {
         return userRepository.findById(id)
                 .map(userReadMapper::map);
