@@ -8,6 +8,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static com.ob11to.spring.database.entity.Role.ADMIN;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -16,8 +18,12 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
+                .authorizeHttpRequests(urlConfig -> urlConfig
+                        .antMatchers("/login", "/users/registration", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        .antMatchers("/users/{\\d+}/delete").hasAuthority(ADMIN.getAuthority())
+                        .antMatchers("/admin/**").hasAuthority(ADMIN.getAuthority())
+                        .anyRequest().authenticated()
+                )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
@@ -25,7 +31,7 @@ public class SecurityConfiguration {
                 .formLogin(login -> login
                         .loginPage("/login")
                         .defaultSuccessUrl("/users")
-                        .permitAll());
+                        );
 
         return http.build();
     }
