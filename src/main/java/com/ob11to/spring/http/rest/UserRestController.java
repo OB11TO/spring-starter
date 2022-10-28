@@ -4,6 +4,7 @@ import com.ob11to.spring.dto.ChatReadDto;
 import com.ob11to.spring.dto.UserCreateDto;
 import com.ob11to.spring.dto.UserReadDto;
 import com.ob11to.spring.service.UserService;
+import com.ob11to.spring.validation.group.UpdateAction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.groups.Default;
 import java.util.List;
 
 @RestController
@@ -50,7 +52,9 @@ public class UserRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserReadDto> updateUser(@PathVariable Long id, @Validated @RequestBody UserCreateDto userCreateDto) {
+    public ResponseEntity<UserReadDto> updateUser(@PathVariable Long id,
+                                                  @Validated({Default.class, UpdateAction.class})
+                                                  @RequestBody UserCreateDto userCreateDto) {
         return userService.updateUser(id, userCreateDto)
                 .map(userReadDto -> ResponseEntity.ok().body(userReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

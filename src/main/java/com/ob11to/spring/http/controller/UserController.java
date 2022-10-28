@@ -7,9 +7,14 @@ import com.ob11to.spring.dto.UserFilter;
 import com.ob11to.spring.service.CompanyService;
 import com.ob11to.spring.service.UserService;
 import com.ob11to.spring.validation.group.CreateAction;
+import com.ob11to.spring.validation.group.UpdateAction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,7 +46,10 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable("id") Long id, Model model) {
+    public String findById(@PathVariable("id") Long id,
+                           Model model,
+                           @CurrentSecurityContext SecurityContext securityContext,
+                           @AuthenticationPrincipal UserDetails userDetails) {
         return userService.findById(id)
                 .map(user -> {
                     model.addAttribute("user", user);
@@ -77,7 +85,7 @@ public class UserController {
     //    @PutMapping("/{id}")
     @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id,
-                         @ModelAttribute @Validated({Default.class, CreateAction.class}) UserCreateDto user) {
+                         @ModelAttribute @Validated({Default.class, UpdateAction.class}) UserCreateDto user) {
         return userService.updateUser(id, user)
                 .map(it -> "redirect:/users/{id}")
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
