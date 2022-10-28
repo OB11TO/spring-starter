@@ -3,6 +3,7 @@ package com.ob11to.spring.dto;
 import com.ob11to.spring.database.entity.Role;
 import com.ob11to.spring.validation.UserInfo;
 import com.ob11to.spring.validation.group.CreateAction;
+import com.ob11to.spring.validation.group.UpdateAction;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 
 @Value
 @FieldNameConstants
-@UserInfo
+@UserInfo(groups = UpdateAction.class)
 public class UserCreateDto {
     @Email(message = "email invalid address")
     String username;
