@@ -19,6 +19,7 @@
         <maven.compiler.target>15</maven.compiler.target>
         <spring.version>5.3.22</spring.version>
         <querydsl.version>5.0.0</querydsl.version>
+        <springdoc.version>1.6.13</springdoc.version>
     </properties>
 
     <dependencies>
@@ -68,7 +69,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.11</version>
+            <version>${springdoc.version}</version>
         </dependency>
 
 
