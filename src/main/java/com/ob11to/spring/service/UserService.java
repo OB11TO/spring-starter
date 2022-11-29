@@ -92,6 +92,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public boolean deleteUser(Long id) {
         return userRepository.findById(id)
                 .map(entity -> {
