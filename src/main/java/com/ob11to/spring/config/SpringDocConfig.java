@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springdoc.core.GroupedOpenApi;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,14 +26,32 @@ public class SpringDocConfig {
     }
 
     @Bean
-    public GroupedOpenApi usersGroup() {
-        return GroupedOpenApi.builder().group("full")
+    public GroupedOpenApi emailGroup(@Value("${springdoc.version}") String appVersion) {
+        return GroupedOpenApi.builder().group("Email API")
                 .addOperationCustomizer((operation, handlerMethod) -> {
                     operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
                     return operation;
                 })
-                .packagesToScan("com.ob11to.spring")
+                .addOpenApiCustomiser(openApi -> openApi.info(new Info().title("Email API").version(appVersion)))
+                .pathsToMatch("/email/**")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi reportGroup(@Value("${springdoc.version}") String appVersion) {
+        return GroupedOpenApi.builder().group("Reports API")
+                .addOperationCustomizer((operation, handlerMethod) -> {
+                    operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
+                    return operation;
+                })
+                .addOpenApiCustomiser(openApi ->
+                        openApi.info(new Info().title("Reports API").version(appVersion))
+                                .externalDocs(new ExternalDocumentation()
+                                        .description("Report ")
+                                        .url("https://github.com/springdoc/springdoc-openapi-demos/blob/master/springdoc-openapi-spring-boot-2-webmvc/src/main/java/org/springdoc/demo/app2/Application.java")))
+                .pathsToMatch("/reports")
+                .build();
+    }
+
 
 }

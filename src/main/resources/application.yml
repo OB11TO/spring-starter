@@ -73,7 +73,7 @@ springdoc:
     disable-swagger-default-url: true
     use-root-path: true
   group-configs:
-    - group: email
-      paths-to-match: /email/**
+    - group: Rest API
+      packages-to-scan: com.ob11to.spring
 
 
