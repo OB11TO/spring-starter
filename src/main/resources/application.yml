@@ -31,6 +31,16 @@ logging:
     org.springframework.jdbc.core: TRACE
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 149951796331-145hl2eaft8vojcjdpcr6mc65836ti3g.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope: openid, email, profile
+
   mvc:
     view:
       prefix: /WEB-INF/jsp/

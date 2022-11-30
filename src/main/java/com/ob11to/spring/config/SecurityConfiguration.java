@@ -31,8 +31,10 @@ public class SecurityConfiguration {
                         .deleteCookies("JSESSIONID"))
                 .formLogin(login -> login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/users")
-                        );
+                        .defaultSuccessUrl("/users"))
+                .oauth2Login(config -> config
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/users"));
 
         return http.build();
     }
