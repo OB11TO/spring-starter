@@ -36,9 +36,14 @@ spring:
       client:
         registration:
           google:
-            clientId: 149951796331-145hl2eaft8vojcjdpcr6mc65836ti3g.apps.googleusercontent.com
-            clientSecret: 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
+            clientId: 613260792617-e94nfvithujgugnhnq73jfn0hs8csmk1.apps.googleusercontent.com
+            clientSecret: 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
             redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope: openid, email, profile
+          github:
+            clientId: 8df1428b005d0d11d2c9
+            clientSecret: 3f22f84ecda4b2d008dd45a81ffb8f572280e557
+            redirectUri: http://localhost:8080/login/oauth2/code/github
             scope: openid, email, profile
 
   mvc:
@@ -77,6 +82,11 @@ spring:
 springdoc:
   version: @springdoc.version@
   swagger-ui:
+    oauth:
+      client-id: 8df1428b005d0d11d2c9
+      client-secret: 3f22f84ecda4b2d008dd45a81ffb8f572280e557
+      scopes: openid,email,profile
+    oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
     display-request-duration: true
     groups-order: DESC
     operationsSorter: method
@@ -85,5 +95,3 @@ springdoc:
   group-configs:
     - group: Rest API
       packages-to-scan: com.ob11to.spring
-
-
