@@ -31,6 +31,21 @@ logging:
     org.springframework.jdbc.core: TRACE
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: gg
+            clientSecret: gg
+            redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope: openid, email, profile
+          github:
+            clientId: gg
+            clientSecret: gg
+            redirectUri: http://localhost:8080/login/oauth2/code/github
+            scope: openid, email, profile
+
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -67,6 +82,11 @@ spring:
 springdoc:
   version: @springdoc.version@
   swagger-ui:
+    oauth:
+      client-id: 8df1428b005d0d11d2c9
+      client-secret: 3f22f84ecda4b2d008dd45a81ffb8f572280e557
+      scopes: openid,email,profile
+    oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
     display-request-duration: true
     groups-order: DESC
     operationsSorter: method
@@ -75,5 +95,3 @@ springdoc:
   group-configs:
     - group: Rest API
       packages-to-scan: com.ob11to.spring
-
-
