@@ -36,13 +36,13 @@ spring:
       client:
         registration:
           google:
-            clientId: 613260792617-e94nfvithujgugnhnq73jfn0hs8csmk1.apps.googleusercontent.com
-            clientSecret: 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
+            clientId: gg
+            clientSecret: gg
             redirectUri: http://localhost:8080/login/oauth2/code/google
             scope: openid, email, profile
           github:
-            clientId: 8df1428b005d0d11d2c9
-            clientSecret: 3f22f84ecda4b2d008dd45a81ffb8f572280e557
+            clientId: gg
+            clientSecret: gg
             redirectUri: http://localhost:8080/login/oauth2/code/github
             scope: openid, email, profile
 

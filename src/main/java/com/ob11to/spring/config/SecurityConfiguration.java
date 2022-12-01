@@ -45,11 +45,11 @@ public class SecurityConfiguration {
                 .formLogin(login -> login
                         .loginPage("/login")
                         .defaultSuccessUrl("/users"))
-                .oauth2Login(config -> config
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/users")
-                        .userInfoEndpoint(userInfo -> userInfo.oidcUserService(oidcUserService()))
-                );
+//                .oauth2Login(config -> config
+//                        .loginPage("/login")
+//                        .defaultSuccessUrl("/users")
+//                        .userInfoEndpoint(userInfo -> userInfo.oidcUserService(oidcUserService()))
+                ;
 
         return http.build();
     }
