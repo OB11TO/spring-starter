@@ -83,8 +83,8 @@ springdoc:
   version: @springdoc.version@
   swagger-ui:
     oauth:
-      client-id: 8df1428b005d0d11d2c9
-      client-secret: 3f22f84ecda4b2d008dd45a81ffb8f572280e557
+      client-id: gg
+      client-secret: gg
       scopes: openid,email,profile
     oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
     display-request-duration: true

@@ -43,8 +43,17 @@ public class SecurityConfiguration {
                         .logoutSuccessUrl("/login")
                         .deleteCookies("JSESSIONID"))
                 .formLogin(login -> login
-                        .loginPage("/login")
+//                        .loginPage("/login")
                         .defaultSuccessUrl("/users"))
+
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .rememberMe().tokenValiditySeconds(10)
+//
+
+        ;
+
+
 //                .oauth2Login(config -> config
 //                        .loginPage("/login")
 //                        .defaultSuccessUrl("/users")
