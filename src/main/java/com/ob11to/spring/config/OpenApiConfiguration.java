@@ -18,15 +18,5 @@ import org.springframework.context.annotation.Configuration;
                 )
         )
 )
-@SecurityScheme(
-        name = "oauth2-github",
-        type = SecuritySchemeType.OAUTH2,
-        flows = @OAuthFlows(
-                authorizationCode = @OAuthFlow(
-                        authorizationUrl = "http://localhost:8080/oauth2/authorization/github",
-                        tokenUrl = "https://github.com/login/oauth/access_token"
-                )
-        )
-)
 public class OpenApiConfiguration {
 }
