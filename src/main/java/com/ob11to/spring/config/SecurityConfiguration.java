@@ -45,10 +45,11 @@ public class SecurityConfiguration {
                 .formLogin(login -> login
 //                        .loginPage("/login")
                         .defaultSuccessUrl("/users"))
+//                .addFilterBefore(jwt, UsernamePasswordAuthenticationFilter.class)
 
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and()
-//                .rememberMe().tokenValiditySeconds(10)
+//                .rememberMe().tokenValiditySeconds(10).key("ob11to")
 //
 
         ;
