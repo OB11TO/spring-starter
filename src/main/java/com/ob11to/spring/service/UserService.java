@@ -43,6 +43,7 @@ public class UserService implements UserDetailsService {
                 .collect(toList());
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
