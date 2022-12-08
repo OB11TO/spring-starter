@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LoginResponse {
 
-//    private final String type = "Bearer";
+    private final String type = "Bearer";
     private String accessToken;
     private String refreshToken;
 }
