@@ -95,3 +95,7 @@ springdoc:
   group-configs:
     - group: Rest API
       packages-to-scan: com.ob11to.spring
+
+jwt:
+  access-jwt-token-valid-second: 5
+  refresh-jwt-token-valid-days: 30
